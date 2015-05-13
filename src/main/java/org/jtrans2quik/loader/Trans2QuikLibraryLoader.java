@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class Trans2QuikLibraryLoader {
 
-    private static final Map NAME_MAPPING = new HashMap();
+    private static final Map<Object, Object> NAME_MAPPING = new HashMap<Object, Object>();
     public static final Trans2QuikLibrary LIBRARY;
 
     static {
