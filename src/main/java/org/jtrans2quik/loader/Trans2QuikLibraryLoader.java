@@ -28,5 +28,5 @@ public class Trans2QuikLibraryLoader {
                 NAME_MAPPING);
     }
 
-    private Trans2QuikLibraryLoader() {}
+    protected Trans2QuikLibraryLoader() {}
 }
