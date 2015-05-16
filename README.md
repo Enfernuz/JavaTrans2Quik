@@ -18,7 +18,6 @@ byte[] buffer = new byte[255];
 ```
 3) Для соединения с терминалом необходимо вызвать метод <i>TRANS2QUIK_CONNECT</i> и, помимо всего прочего, передать туда путь к папке с терминалом QUIK:
 ```
-...
 final String pathToQuik = "C:\\Programs\\Quik";
 NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, buffer, bufferSize);
 ```
@@ -96,5 +95,10 @@ Trans2QuikLibrary.OrderStatusCallback orderStatusCallback = new Trans2QuikLibrar
 ```
 Разумеется, логгирование -- не единственная возможная ваша реакция на событие. 
 Например, информацию OrderStatusCallback можно использовать для контролирования работы бота.
+
+Экземпляры обработчиков коллбэков нужно передать библиотеке Trans2Quik.dll. Для каждого коллбэка в библиотеке существует свой метод для этого. Например, для установки коллбэка на статус соединения (ConnectionStatusCallback) используется метод <i>TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK</i>:
+```
+retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatusCallback, errorCode, buffer, bufferSize);
+```
 
 Подводя итог: результаты некоторых событий, происходящих в терминале, -- обработки транзакций, изменения статуса заявок и многое другое (см. "6 Работа с др приложениями.pdf") -- получаются посредством коллбэков.
