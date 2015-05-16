@@ -19,7 +19,7 @@ byte[] buffer = new byte[255];
 3) Для соединения с терминалом необходимо вызвать метод <i>TRANS2QUIK_CONNECT</i> и, помимо всего прочего, передать туда путь к папке с терминалом QUIK:
 ```
 final String pathToQuik = "C:\\Programs\\Quik";
-NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, buffer, bufferSize);
+NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, buffer, buffer.length);
 ```
 4) Чтобы отправить транзакцию в терминал, необходимо:
 -- Сформировать строковое представление транзакции (примеры таких представлений можно найти в файле "6 Работа с др приложениями.pdf" из инструкции к API терминала):
@@ -27,7 +27,7 @@ NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, bu
 -- Вызвать метод библиотеки <i>TRANS2QUIK_SEND_ASYNC_TRANSACTION( ... )</i> и передать ему строковое представление транзации, объекты под код ошибки и сообщение для ошибки
 ```
 final String transaction = "ACCOUNT=NL0080000043; CLIENT_CODE=467; TYPE=L; TRANS_ID=1; CLASSCODE=TQBR; SECCODE=RU0008943394; ACTION=NEW_ORDER; OPERATION=S; PRICE=43,21; QUANTITY=3;"
-Long result = quikAdapter.TRANS2QUIK_SEND_ASYNC_TRANSACTION(transaction, errorCode, buff, buff.length);
+Long result = quikAdapter.TRANS2QUIK_SEND_ASYNC_TRANSACTION(transaction, errorCode, buffer, buffer.length);
 ```
 Расшифровка результата <i>result</i> работы метода следующая (алиасы говорят сами за себя):
 ```
@@ -98,7 +98,7 @@ Trans2QuikLibrary.OrderStatusCallback orderStatusCallback = new Trans2QuikLibrar
 
 Экземпляры обработчиков коллбэков нужно передать библиотеке Trans2Quik.dll. Для каждого коллбэка в библиотеке существует свой метод для этого. Например, для установки коллбэка на статус соединения (ConnectionStatusCallback) используется метод <i>TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK</i>:
 ```
-retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatusCallback, errorCode, buffer, bufferSize);
+retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatusCallback, errorCode, buffer, buffer.length;
 ```
 Вообще говоря, реализовывать и устанавливать коллбэки -- дело сугубо личное, определяемое исходя из списка событий, которые вам интересны.
 
