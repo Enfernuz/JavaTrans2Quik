@@ -22,8 +22,10 @@ final String pathToQuik = "C:\\Programs\\Quik";
 NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, buffer, buffer.length);
 ```
 4) Чтобы отправить транзакцию в терминал, необходимо:
+<br/>
 -- Сформировать строковое представление транзакции (примеры таких представлений можно найти в файле "6 Работа с др приложениями.pdf" из инструкции к API терминала):
 Чтобы не усложнять, возьмём уже сформированную строку.
+<br/>
 -- Вызвать метод библиотеки <i>TRANS2QUIK_SEND_ASYNC_TRANSACTION( ... )</i> и передать ему строковое представление транзации, объекты под код ошибки и сообщение для ошибки
 ```
 final String transaction = "ACCOUNT=NL0080000043; CLIENT_CODE=467; TYPE=L; TRANS_ID=1; CLASSCODE=TQBR; SECCODE=RU0008943394; ACTION=NEW_ORDER; OPERATION=S; PRICE=43,21; QUANTITY=3;"
