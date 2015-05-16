@@ -100,5 +100,6 @@ Trans2QuikLibrary.OrderStatusCallback orderStatusCallback = new Trans2QuikLibrar
 ```
 retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatusCallback, errorCode, buffer, bufferSize);
 ```
+Вообще говоря, реализовывать и устанавливать коллбэки -- дело сугубо личное, определяемое исходя из списка событий, которые вам интересны.
 
 Подводя итог: результаты некоторых событий, происходящих в терминале, -- обработки транзакций, изменения статуса заявок и многое другое (см. "6 Работа с др приложениями.pdf") -- получаются посредством коллбэков.
