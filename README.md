@@ -16,7 +16,13 @@ final Trans2QuikLibrary quikAdapter = Trans2QuikLibraryLoader.LIBRARY;
 NativeLongByReference errorCode = new NativeLongByReference();
 byte[] buffer = new byte[255];
 ```
-3) Чтобы отправить транзакцию в терминал, необходимо:
+3) Для соединения с терминалом необходимо вызвать метод <i>TRANS2QUIK_CONNECT</i> и, помимо всего прочего, передать туда путь к папке с терминалом QUIK:
+```
+...
+final String pathToQuik = "C:\\Programs\\Quik";
+NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, buffer, bufferSize);
+```
+4) Чтобы отправить транзакцию в терминал, необходимо:
 -- Сформировать строковое представление транзакции (примеры таких представлений можно найти в файле "6 Работа с др приложениями.pdf" из инструкции к API терминала):
 Чтобы не усложнять, возьмём уже сформированную строку.
 -- Вызвать метод библиотеки <i>TRANS2QUIK_SEND_ASYNC_TRANSACTION( ... )</i> и передать ему строковое представление транзации, объекты под код ошибки и сообщение для ошибки
