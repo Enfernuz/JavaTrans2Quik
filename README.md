@@ -59,7 +59,7 @@ Long result = quikAdapter.TRANS2QUIK_SEND_ASYNC_TRANSACTION(transaction, errorCo
 Например, мы хотим реагировать на обрыв соединения с Интернетом, логгируя это событие. Для этого в Trans2Quik есть callback под названием TRANS2QUIK_CONNECTION_STATUS_CALLBACK. 
 В обёртке он представлен интерфейсом ConnectionStatusCallback, наследником общего интерфейса коллбэков StdCallCallback.
 Каждый коллбэк имеет у себя метод void callback( ... ) со своим набором аргументов.
-В своём коде создаём экземпляр интерфейса ConnectionStatusCallback и переопределяем у него метод callback:
+В своём коде создаём объект интерфейса ConnectionStatusCallback и переопределяем у него метод callback:
 ```
 Trans2QuikLibrary.ConnectionStatusCallback connectionStatusCallback = new Trans2QuikLibrary.ConnectionStatusCallback() {
         @Override
