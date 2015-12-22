@@ -29,6 +29,6 @@ public final class Trans2QuikLibraryLoader {
     }
 
     private Trans2QuikLibraryLoader() {
-        throw new AssertionError("This should never be invoked.")
+        throw new AssertionError("This should never be invoked.");
     }
 }
