@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Arsentii Nerushev on 14.05.2015.
  * @version 1.0.0
  */
-public class Trans2QuikLibraryLoader {
+public final class Trans2QuikLibraryLoader {
 
     private static final Map<Object, Object> NAME_MAPPING = new HashMap<Object, Object>();
     public static final Trans2QuikLibrary LIBRARY;
@@ -28,5 +28,7 @@ public class Trans2QuikLibraryLoader {
                 NAME_MAPPING);
     }
 
-    protected Trans2QuikLibraryLoader() {}
+    private Trans2QuikLibraryLoader() {
+        throw new AssertionError("This should never be invoked.")
+    }
 }

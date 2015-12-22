@@ -1,17 +1,13 @@
 package org.jtrans2quik.wrapper;
 
-import com.sun.jna.Callback;
-import com.sun.jna.NativeLong;
-import com.sun.jna.WString;
-import com.sun.jna.ptr.DoubleByReference;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.NativeLongByReference;
+import com.sun.jna.*;
+import com.sun.jna.ptr.*;
 import com.sun.jna.win32.StdCallLibrary;
 
 /**
  *
  * @author Arsentii Nerushev
- * @version 1.0.0
+ * @version 1.0.1
  */
 public interface Trans2QuikLibrary extends StdCallLibrary {
 
@@ -37,7 +33,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
          * @param nOrderDescriptor
          * @since 1.0.0
          */
-        public abstract void callback(
+        void callback(
                 NativeLong nMode,
                 int dwTransID,
                 double dNumber,
@@ -69,7 +65,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
          * @param lpcstrTransactionReplyMessage
          * @since 1.0.0
          */
-        public abstract void callback(
+        void callback(
                 NativeLong nTransactionResult,
                 NativeLong nTransactionExtendedErrorCode,
                 NativeLong nTransactionReplyCode,
@@ -91,7 +87,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
          * @param lpcstrInfoMessage
          * @since 1.0.0
         */
-        public abstract void callback(
+        void callback(
                 NativeLong nConnectionEvent,
                 NativeLong nExtendedErrorCode,
                 String lpcstrInfoMessage
@@ -117,7 +113,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
         TRANS2QUIK_FAILED – произошла ошибка при установлении соединения, в pnExtendedErrorCode в этом случае передается дополнительный код ошибки
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_CONNECT(
+    NativeLong TRANS2QUIK_CONNECT(
             String lpcstrConnectionParamsString,
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
@@ -138,7 +134,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
         TRANS2QUIK_DLL_NOT_CONNECTED – попытка разорвать соединение при не установленной связи. В этом случае в pnExtendedErrorCode может передаваться дополнительный код ошибки
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_DISCONNECT(
+    NativeLong TRANS2QUIK_DISCONNECT(
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
             int dwErrorMessageSize
@@ -168,7 +164,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return DLL connection status
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_IS_DLL_CONNECTED(
+    NativeLong TRANS2QUIK_IS_DLL_CONNECTED(
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
             int dwErrorMessageSize
@@ -190,7 +186,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SEND_SYNC_TRANSACTION(
+    NativeLong TRANS2QUIK_SEND_SYNC_TRANSACTION(
             String lpstTransactionString,
             NativeLongByReference pnReplyCode,
             IntByReference pdwTransId,
@@ -212,7 +208,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SEND_ASYNC_TRANSACTION(
+    NativeLong TRANS2QUIK_SEND_ASYNC_TRANSACTION(
             String lpstTransactionString,
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
@@ -230,7 +226,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(
+    NativeLong TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(
             Callback pfConnectionStatusCallback,
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
@@ -248,7 +244,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SET_TRANSACTIONS_REPLY_CALLBACK(
+    NativeLong TRANS2QUIK_SET_TRANSACTIONS_REPLY_CALLBACK(
             Callback pfTransactionReplyCallback,
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
@@ -263,7 +259,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SUBSCRIBE_ORDERS(
+    NativeLong TRANS2QUIK_SUBSCRIBE_ORDERS(
             String ClassCode,
             String Seccodes
     );
@@ -275,7 +271,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_SUBSCRIBE_TRADES(
+    NativeLong TRANS2QUIK_SUBSCRIBE_TRADES(
             String ClassCode,
             String Seccodes
     );
@@ -287,7 +283,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_START_ORDERS(Callback pfnOrderStatusCallback);
+    NativeLong TRANS2QUIK_START_ORDERS(Callback pfnOrderStatusCallback);
         
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_START_TRADES
@@ -295,21 +291,21 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @param pfnTradeStatusCallback
      * @return 
      */
-    public abstract NativeLong TRANS2QUIK_START_TRADES(Callback pfnTradeStatusCallback);
+    NativeLong TRANS2QUIK_START_TRADES(Callback pfnTradeStatusCallback);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_UNSUBSCRIBE_ORDERS ();
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_UNSUBSCRIBE_ORDERS();
+    NativeLong TRANS2QUIK_UNSUBSCRIBE_ORDERS();
         
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_UNSUBSCRIBE_TRADES ();
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_UNSUBSCRIBE_TRADES();
+    NativeLong TRANS2QUIK_UNSUBSCRIBE_TRADES();
         
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_QTY (long nOrderDescriptor);
@@ -317,7 +313,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_QTY(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_QTY(NativeLong nOrderDescriptor);
         
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_DATE (long nOrderDescriptor);
@@ -325,7 +321,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_DATE(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_DATE(NativeLong nOrderDescriptor);
         
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_TIME (long nOrderDescriptor);
@@ -333,7 +329,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_TIME(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_TIME(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_ACTIVATION_TIME (long nOrderDescriptor);
@@ -341,7 +337,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_ACTIVATION_TIME(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_ACTIVATION_TIME(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_WITHDRAW_TIME (long nOrderDescriptor);
@@ -349,7 +345,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_WITHDRAW_TIME(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_WITHDRAW_TIME(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_EXPIRY (long nOrderDescriptor);
@@ -357,7 +353,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_EXPIRY(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_EXPIRY(NativeLong nOrderDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_ACCRUED_INT (long nOrderDescriptor);
@@ -365,7 +361,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_ORDER_ACCRUED_INT(NativeLong nOrderDescriptor);
+    double TRANS2QUIK_ORDER_ACCRUED_INT(NativeLong nOrderDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_YIELD (long nOrderDescriptor);
@@ -373,7 +369,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_ORDER_YIELD(NativeLong nOrderDescriptor);
+    double TRANS2QUIK_ORDER_YIELD(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_UID (long nOrderDescriptor);
@@ -381,7 +377,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_UID(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_UID(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_VISIBLE_QTY (long nOrderDescriptor);
@@ -389,7 +385,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_VISIBLE_QTY(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_VISIBLE_QTY(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_PERIOD (long nOrderDescriptor);
@@ -397,7 +393,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_PERIOD(NativeLong nOrderDescriptor);
+    NativeLong TRANS2QUIK_ORDER_PERIOD(NativeLong nOrderDescriptor);
         
     /**
      * FILETIME TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_FILETIME (long nOrderDescriptor);
@@ -411,7 +407,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_ORDER_DATE_TIME(NativeLong nOrderDescriptor, NativeLong nTimeType);
+    NativeLong TRANS2QUIK_ORDER_DATE_TIME(NativeLong nOrderDescriptor, NativeLong nTimeType);
 
     /**
      * FILETIME TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_WITHDRAW_FILETIME (long nOrderDescriptor);
@@ -424,7 +420,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_ORDER_USERID(NativeLong nOrderDescriptor);
+    WString TRANS2QUIK_ORDER_USERID(NativeLong nOrderDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_ACCOUNT (long nOrderDescriptor); 
@@ -432,7 +428,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_ORDER_ACCOUNT(NativeLong nOrderDescriptor);
+    WString TRANS2QUIK_ORDER_ACCOUNT(NativeLong nOrderDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_BROKERREF (long nOrderDescriptor);
@@ -440,7 +436,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_ORDER_BROKERREF(NativeLong nOrderDescriptor);
+    WString TRANS2QUIK_ORDER_BROKERREF(NativeLong nOrderDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_CLIENT_CODE (long nOrderDescriptor);
@@ -448,7 +444,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_ORDER_CLIENT_CODE(NativeLong nOrderDescriptor);
+    WString TRANS2QUIK_ORDER_CLIENT_CODE(NativeLong nOrderDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_FIRMID (long nOrderDescriptor);
@@ -456,7 +452,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_ORDER_FIRMID(NativeLong nOrderDescriptor);
+    WString TRANS2QUIK_ORDER_FIRMID(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_DATE (long nTradeDescriptor);
@@ -464,7 +460,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_DATE(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_DATE(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_SETTLE_DATE (long nTradeDescriptor);
@@ -472,7 +468,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_SETTLE_DATE(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_SETTLE_DATE(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_TIME (long nTradeDescriptor);
@@ -480,7 +476,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_TIME(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_TIME(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_IS_MARGINAL (long nTradeDescriptor);
@@ -488,7 +484,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_IS_MARGINAL(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_IS_MARGINAL(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_ACCRUED_INT (long nTradeDescriptor);
@@ -496,7 +492,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_ACCRUED_INT(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_ACCRUED_INT(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_YIELD (long nTradeDescriptor);
@@ -504,7 +500,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_YIELD(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_YIELD(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_TS_COMMISSION (long nTradeDescriptor);
@@ -512,7 +508,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_TS_COMMISSION(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_TS_COMMISSION(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_CLEARING_CENTER_COMMISSION (long nTradeDescriptor);
@@ -520,7 +516,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_CLEARING_CENTER_COMMISSION(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_CLEARING_CENTER_COMMISSION(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_EXCHANGE_COMMISSION (long nTradeDescriptor);
@@ -528,7 +524,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_EXCHANGE_COMMISSION(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_EXCHANGE_COMMISSION(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_TRADING_SYSTEM_COMMISSION (long nTradeDescriptor);
@@ -536,7 +532,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_TRADING_SYSTEM_COMMISSION(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_TRADING_SYSTEM_COMMISSION(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_PRICE2 (long nTradeDescriptor);
@@ -544,7 +540,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_PRICE2(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_PRICE2(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_REPO_RATE (long nTradeDescriptor);
@@ -552,7 +548,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_REPO_RATE(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_REPO_RATE(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_REPO_VALUE (long nTradeDescriptor);
@@ -560,7 +556,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_REPO_VALUE(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_REPO_VALUE(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_REPO2_VALUE (long nTradeDescriptor);
@@ -568,7 +564,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_REPO2_VALUE(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_REPO2_VALUE(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_ACCRUED_INT2 (long nTradeDescriptor);
@@ -576,7 +572,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_ACCRUED_INT2(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_ACCRUED_INT2(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_REPO_TERM (long nTradeDescriptor);
@@ -584,7 +580,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_REPO_TERM(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_REPO_TERM(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_START_DISCOUNT (long nTradeDescriptor);
@@ -592,7 +588,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_START_DISCOUNT(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_START_DISCOUNT(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_LOWER_DISCOUNT (long nTradeDescriptor);
@@ -600,7 +596,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_LOWER_DISCOUNT(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_LOWER_DISCOUNT(NativeLong nTradeDescriptor);
 
     /**
      * double TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_UPPER_DISCOUNT (long nTradeDescriptor);
@@ -608,7 +604,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract double TRANS2QUIK_TRADE_UPPER_DISCOUNT(NativeLong nTradeDescriptor);
+    double TRANS2QUIK_TRADE_UPPER_DISCOUNT(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_BLOCK_SECURITIES (long nTradeDescriptor);
@@ -616,7 +612,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_BLOCK_SECURITIES(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_BLOCK_SECURITIES(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_PERIOD (long nTradeDescriptor);
@@ -624,7 +620,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_PERIOD(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_PERIOD(NativeLong nTradeDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_REPO_TERM (long nTradeDescriptor);
@@ -632,7 +628,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_KIND(NativeLong nTradeDescriptor);
+    NativeLong TRANS2QUIK_TRADE_KIND(NativeLong nTradeDescriptor);
 
     /**
      * FILETIME TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_FILETIME (long nTradeDescriptor);
@@ -646,7 +642,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_TRADE_DATE_TIME(NativeLong nTradeDescriptor, NativeLong nTimeType);
+    NativeLong TRANS2QUIK_TRADE_DATE_TIME(NativeLong nTradeDescriptor, NativeLong nTimeType);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_CURRENCY (long nTradeDescriptor);
@@ -654,7 +650,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_CURRENCY(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_CURRENCY(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_SETTLE_CURRENCY (long nTradeDescriptor);
@@ -662,7 +658,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_SETTLE_CURRENCY(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_SETTLE_CURRENCY(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_SETTLE_CODE (long nTradeDescriptor);
@@ -670,7 +666,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_SETTLE_CODE(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_SETTLE_CODE(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_ACCOUNT (long nTradeDescriptor);
@@ -678,7 +674,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_ACCOUNT(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_ACCOUNT(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_BROKERREF (long nTradeDescriptor);
@@ -686,7 +682,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_BROKERREF(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_BROKERREF(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_CLIENT_CODE (long nTradeDescriptor);
@@ -694,7 +690,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_CLIENT_CODE(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_CLIENT_CODE(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_USERID (long nTradeDescriptor);
@@ -702,7 +698,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_USERID(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_USERID(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_FIRMID (long nTradeDescriptor);
@@ -710,7 +706,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_FIRMID(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_FIRMID(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_PARTNER_FIRMID (long nTradeDescriptor);
@@ -718,7 +714,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_PARTNER_FIRMID(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_PARTNER_FIRMID(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_EXCHANGE_CODE (long nTradeDescriptor);
@@ -726,7 +722,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_EXCHANGE_CODE(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_EXCHANGE_CODE(NativeLong nTradeDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_TRADE_STATION_ID (long nTradeDescriptor);
@@ -734,5 +730,5 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return
      * @since 1.0.0
      */
-    public abstract WString TRANS2QUIK_TRADE_STATION_ID(NativeLong nTradeDescriptor);
+    WString TRANS2QUIK_TRADE_STATION_ID(NativeLong nTradeDescriptor);
 }

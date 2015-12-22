@@ -6,10 +6,11 @@
 
     <groupId>org.jtrans2quik</groupId>
     <artifactId>wrapper</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.jna-platform>4.1.0</version.jna-platform>
     </properties>
 
     <dependencies>
@@ -17,7 +18,7 @@
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
-            <version>4.1.0</version>
+            <version>${version.jna-platform}</version>
         </dependency>
 
     </dependencies>

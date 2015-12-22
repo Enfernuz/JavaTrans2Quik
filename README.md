@@ -1,5 +1,5 @@
 # JavaTrans2Quik
-Java-wrapper for Trans2Quik.dll
+JNA-based Java-wrapper for Trans2Quik.dll version 1.2.0.3
 ("QUIK", Trading Platform by ARQA)
 
 <h3>Как использовать</h3>
