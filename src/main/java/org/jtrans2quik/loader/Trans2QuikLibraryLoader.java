@@ -11,21 +11,22 @@ import java.util.Map;
 
 /**
  * Created by Arsentii Nerushev on 14.05.2015.
- * @version 1.0.0
+ * @version 1.0.1
  */
 public final class Trans2QuikLibraryLoader {
 
-    private static final Map<Object, Object> NAME_MAPPING = new HashMap<Object, Object>();
     public static final Trans2QuikLibrary LIBRARY;
 
     static {
-        NAME_MAPPING.put(Library.OPTION_FUNCTION_MAPPER, StdCallLibrary.FUNCTION_MAPPER);
-        NAME_MAPPING.put(Library.OPTION_CALLING_CONVENTION, Function.C_CONVENTION);
+        
+        final Map<Object, Object> nameMapping = new HashMap<Object, Object>();
+        nameMapping.put(Library.OPTION_FUNCTION_MAPPER, StdCallLibrary.FUNCTION_MAPPER);
+        nameMapping.put(Library.OPTION_CALLING_CONVENTION, Function.C_CONVENTION);
         System.setProperty("java.library.path", "lib/win32-x86");
         LIBRARY = (Trans2QuikLibrary) Native.loadLibrary(
                 "TRANS2QUIK",
                 Trans2QuikLibrary.class,
-                NAME_MAPPING);
+                nameMapping);
     }
 
     private Trans2QuikLibraryLoader() {

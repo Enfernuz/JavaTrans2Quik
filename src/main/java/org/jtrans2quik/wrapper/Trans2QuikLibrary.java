@@ -10,6 +10,11 @@ import com.sun.jna.win32.StdCallLibrary;
  * @version 1.0.1
  */
 public interface Trans2QuikLibrary extends StdCallLibrary {
+    
+    /*
+    * Java Native Access (JNA) overview: 
+    * https://jna.java.net/javadoc/overview-summary.html
+    */
 
     /**
      * @since 1.0.0
@@ -23,8 +28,8 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
          * @param nMode
          * @param dwTransID
          * @param dNumber
-         * @param ClassCode
-         * @param SecCode
+         * @param classCode
+         * @param secCode
          * @param dPrice
          * @param nBalance
          * @param dValue
@@ -37,8 +42,8 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
                 NativeLong nMode,
                 int dwTransID,
                 double dNumber,
-                String ClassCode,
-                String SecCode,
+                String classCode,
+                String secCode,
                 double dPrice,
                 NativeLong nBalance,
                 double dValue,
@@ -149,7 +154,7 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
      * @return terminal connection status
      * @since 1.0.0
      */
-    public abstract NativeLong TRANS2QUIK_IS_QUIK_CONNECTED(
+    public NativeLong TRANS2QUIK_IS_QUIK_CONNECTED(
             NativeLongByReference pnExtendedErrorCode,
             byte[] lpstrErrorMessage,
             int dwErrorMessageSize
@@ -397,8 +402,11 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
         
     /**
      * FILETIME TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_FILETIME (long nOrderDescriptor);
+     * @param nOrderDescriptor
+     * @return FILETIME structure value
+     * @since 1.0.1
      */
-    //void TRANS2QUIK_ORDER_FILETIME(NativeLong nOrderDescriptor);
+    Structure TRANS2QUIK_ORDER_FILETIME(NativeLong nOrderDescriptor);
 
     /**
      * long TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_DATE_TIME (long nOrderDescriptor, long nTimeType);
@@ -411,8 +419,11 @@ public interface Trans2QuikLibrary extends StdCallLibrary {
 
     /**
      * FILETIME TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_WITHDRAW_FILETIME (long nOrderDescriptor);
+     * @param nOrderDescriptor
+     * @return FILETIME structure value
+     * @since 1.0.1
      */
-    //void TRANS2QUIK_ORDER_WITHDRAW_FILETIME(NativeLong nOrderDescriptor);
+    Structure TRANS2QUIK_ORDER_WITHDRAW_FILETIME(NativeLong nOrderDescriptor);
 
     /**
      * LPTSTR TRANS2QUIK_API __stdcall TRANS2QUIK_ORDER_USERID (long nOrderDescriptor);
