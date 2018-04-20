@@ -116,4 +116,11 @@ retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatus
 
 <h3>Как получать информацию из Quik в Java?</h3>
 
-Лично я использую способ, описанный здесь: https://github.com/boscogh/quik_pipe
+Я знаю как минимум два способа:
+
+1. Установить на стороне QUIK RPC-сервис (сервис вызова удалённых процедур): <br/>
+    https://github.com/Enfernuz/quik-lua-rpc
+
+    Java-клиент к нему: https://github.com/Enfernuz/quik-lua-rpc-java-client
+
+2. Практически то же самое, но менее функционально: https://github.com/boscogh/quik_pipe
