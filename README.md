@@ -122,5 +122,7 @@ retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatus
     https://github.com/Enfernuz/quik-lua-rpc
 
     Java-клиент к нему: https://github.com/Enfernuz/quik-lua-rpc-java-client
+    
+    Реализует все методы API QLua, поэтому умеет также и в отправку транзакций (метод QLua `sendTransaction`). В сущности, при использовании `quik-lua-rpc` вам уже не нужен `JavaTrans2Quik`.
 
 2. Ещё один RPC-сервис. Проще в установке, но менее функционален: https://github.com/boscogh/quik_pipe
