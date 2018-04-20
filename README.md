@@ -123,4 +123,4 @@ retcode = quikAdapter.TRANS2QUIK_SET_CONNECTION_STATUS_CALLBACK(connectionStatus
 
     Java-клиент к нему: https://github.com/Enfernuz/quik-lua-rpc-java-client
 
-2. Практически то же самое, но менее функционально: https://github.com/boscogh/quik_pipe
+2. Ещё один RPC-сервис. Проще в установке, но менее функционален: https://github.com/boscogh/quik_pipe
