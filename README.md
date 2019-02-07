@@ -25,12 +25,13 @@ NativeLong returnCode = quikAdapter.TRANS2QUIK_CONNECT(pathToQuik, errorCode, bu
 4) Чтобы отправить транзакцию в терминал, необходимо:
 
     1) Сформировать строковое представление транзакции (примеры таких представлений можно найти в файле "6 Работа с др приложениями.pdf" из инструкции к API терминала). Чтобы не усложнять, возьмём уже сформированную строку.
-    2) Вызвать метод библиотеки <i>TRANS2QUIK_SEND_ASYNC_TRANSACTION( ... )</i> и передать ему строковое представление транзации, объекты под код ошибки и сообщение для ошибки.
+    2) Вызвать метод библиотеки <i>TRANS2QUIK_SEND_SYNC_TRANSACTION( ... )</i> и передать ему строковое представление транзации, объекты под код ошибки и сообщение для ошибки.
+    <br/>Есть также и асинхронный способ отправки транзакции: с помощью метода <i>TRANS2QUIK_SEND_ASYNC_TRANSACTION</i> и коллбэка <i>TransactionReplyCallback</i>, устанавливаемого посредством метода <i>TRANS2QUIK_SET_TRANSACTIONS_REPLY_CALLBACK</i>.
     
 **Внимание!** Строковое представление транзакции взято из руководства к библиотеке trans2quik.dll, и транзакция, основанная на нём, на сервер отправлена не будет, т.к. в ней имеются недействительные значения параметров. Для грамотного составления строк транзакций рекомендую ознакомиться с форматом транзакций в файле "6 Работа с др приложениями.pdf", пункт 6.11.3.
 ```
 String transaction = "ACCOUNT=NL0080000043; CLIENT_CODE=467; TYPE=L; TRANS_ID=1; CLASSCODE=TQBR; SECCODE=RU0008943394; ACTION=NEW_ORDER; OPERATION=S; PRICE=43,21; QUANTITY=3;"
-Long result = quikAdapter.TRANS2QUIK_SEND_ASYNC_TRANSACTION(transaction, errorCode, buffer, buffer.length);
+Long result = quikAdapter.TRANS2QUIK_SEND_SYNC_TRANSACTION(transaction, errorCode, buffer, buffer.length);
 ```
 Расшифровка результата <i>result</i> работы метода следующая (алиасы говорят сами за себя):
 
