@@ -15,4 +15,4 @@ jobs:
         java-version: 1.8
         architecture: x86
     - name: Build & Deploy with Maven
-      run: mvn -B deploy --file pom.xml -Dregistry=https://maven.pkg.github.com/Enfernuz -Dtoken=GH_TOKEN
+      run: mvn -B deploy --file pom.xml -Dregistry=https://maven.pkg.github.com/Enfernuz -Dtoken=${{secrets.GITHUB_TOKEN}}
