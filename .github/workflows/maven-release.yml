@@ -1,6 +1,8 @@
 name: Maven Release Package Deployment
 
-on: [release]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
