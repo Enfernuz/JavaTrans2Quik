@@ -21,6 +21,14 @@
         <system>github</system>
         <url>https://github.com/Enfernuz/JavaTrans2Quik/issues</url>
     </issueManagement>
+         
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Enfernuz Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Enfernuz/JavaTrans2Quik</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
