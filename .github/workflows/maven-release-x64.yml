@@ -22,4 +22,4 @@ jobs:
         run: |
           mkdir ~/.m2
           echo "<settings><servers><server><id>github</id><username>Enfernuz</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
-          mvn -B deploy -Dclassifier=x64
+          mvn -B deploy
