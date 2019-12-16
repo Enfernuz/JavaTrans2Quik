@@ -1,0 +1,25 @@
+name: Maven Release Package Deployment for the x64 trans2quik.dll
+
+on:
+  push:
+    tags:
+      - 'v*.*.*-x64'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build & Deploy with Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir ~/.m2
+          echo "<settings><servers><server><id>github</id><username>Enfernuz</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn -B deploy -Dclassifier=x64
