@@ -1,8 +1,9 @@
 name: Maven Release Package Deployment
 
-push:
-  tags:
-    - 'v*.*.*-x86'
+on:
+  push:
+    tags:
+      - 'v*.*.*-x86'
 
 jobs:
   build:
