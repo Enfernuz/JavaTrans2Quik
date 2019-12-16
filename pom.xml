@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.enfernuz</groupId>
-    <artifactId>JavaTrans2Quik</artifactId>
-    <version>1.0.1</version>
+    <artifactId>jtrans2quik-x86</artifactId>
+    <version>1.3.0</version>
 
     <name>JavaTrans2Quik</name>
     <url>https://github.com/Enfernuz/JavaTrans2Quik</url>
-    <description>A Java-wrapper for Trans2Quik.dll ("QUIK", a trading platform designed by ARQA @ arqatech.com)</description>
+    <description>A Java-wrapper for x86 Trans2Quik.dll ("QUIK", a trading platform designed by ARQA @ arqatech.com)</description>
 
     <scm>
         <url>https://github.com/Enfernuz/JavaTrans2Quik</url>
